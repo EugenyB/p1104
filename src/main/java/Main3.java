@@ -8,7 +8,7 @@ public class Main3 {
         main.run();
     }
 
-    private void run() {
+    private void run() { // Задача "Унікальні елементи"
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
         // <число,кількість>
@@ -23,7 +23,7 @@ public class Main3 {
             }
         }
 
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) { // Проходимося парами значень
             if (entry.getValue() == 1) {
                 System.out.print(entry.getKey() + " ");
             }
