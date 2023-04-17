@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
 public class Main2 {
     public static void main(String[] args) {
@@ -6,54 +7,42 @@ public class Main2 {
         main.run();
     }
 
-    private void run() {
-        List<String> list = new ArrayList<>(List.of("first", "second", "last", "very last"));
-        System.out.println(list);
-        System.out.println(list.get(2));  // System.out.println(list[2]);
-        list.set(3, "fourth");            // list[3] = "fourth";
-        System.out.println(list);
+    private void run() { // Problem "Sorting Time"
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        PriorityQueue<Time> queue = new PriorityQueue<>(); // Пріоритетна черга
+        for (int i = 0; i < n; i++) {
+            queue.add(new Time(in.nextInt(), in.nextInt(), in.nextInt()));
+        }
 
-        List<String> strings = List.of("Jack", "John", "Sara", "Donald", "Maria", "Bill", "John");
-        System.out.println(strings);
-        Set<String> set = new HashSet<>(strings);
-        System.out.println(set);
+        while (!queue.isEmpty()) {
+            System.out.println(queue.poll());
+        }
+    }
+}
 
-        Set<Integer> intSet = new HashSet<>(List.of(20,1,2,3,8,4,15,6,7,20,9));
-        System.out.println(intSet + " " + intSet.size());
-        intSet.add(18);
-        System.out.println(intSet + " " + intSet.size());
-        intSet.add(30);
-        System.out.println(intSet + " " + intSet.size());
-        intSet.add(35);
-        System.out.println(intSet + " " + intSet.size());
+class Time implements Comparable<Time> {
+    int h;
+    int m;
+    int s;
 
-        Set<String> sorted = new TreeSet<>(strings);
-        System.out.println(sorted);
+    public Time(int h, int m, int s) {
+        this.h = h;
+        this.m = m;
+        this.s = s;
+    }
 
-        List<Person> people = List.of(
-                new Person("John", 25),
-                new Person("Jack", 30),
-                new Person("Maria", 23),
-                new Person("Jack", 23),
-                new Person("Bill", 40)
-        );
+    @Override
+    public String toString() {
+        return h + " " + m + " " + s;
+    }
 
-        Set<Person> personSet = new TreeSet<>(people);
-        System.out.println(personSet);
-
-        PriorityQueue<Integer> nums = new PriorityQueue<>(Comparator.reverseOrder());
-        nums.add(7);
-        nums.add(5);
-        nums.add(10);
-        nums.add(8);
-        nums.add(6);
-        nums.add(1);
-        nums.add(12);
-        nums.add(2);
-        nums.add(4);
-
-        System.out.println(nums);
-        System.out.println(nums.poll());
-        System.out.println(nums);
+    @Override
+    public int compareTo(Time other) {
+        int k = Integer.compare(h, other.h);
+        if (k!=0) return k;
+        k = Integer.compare(m, other.m);
+        if (k!=0) return k;
+        return Integer.compare(s, other.s);
     }
 }
